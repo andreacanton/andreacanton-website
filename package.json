@@ -1,15 +1,15 @@
 {
-  "name": "andreacanton.com",
-  "version": "1.1.0",
+  "name": "andreacanton-website",
+  "version": "1.1.1",
   "description": "The personal website of Andrea Canton an average human being, web developer, vegetarian based in Verona area, Italy EU.",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider vuepress dev",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider vuepress build"
+    "dev": "vuepress dev",
+    "build": "vuepress build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andreacanton/andreacanton.com.git"
+    "url": "git+https://github.com/andreacanton/andreacanton-website.git"
   },
   "keywords": [
     "personal",
@@ -18,14 +18,10 @@
   "author": "Andrea Canton <hello@andreacanton.dev>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/andreacanton/andreacanton.com/issues"
+    "url": "https://github.com/andreacanton/andreacanton-website/issues"
   },
-  "homepage": "https://github.com/andreacanton/andreacanton.com#readme",
+  "homepage": "https://andreacanton.dev",
   "devDependencies": {
-    "eslint": "~8.2.0",
-    "eslint-config-airbnb-base": "~15.0.0",
-    "eslint-plugin-import": "~2.25.3",
-    "eslint-plugin-vue": "~8.1.1",
     "vuepress": "^1.8.2",
     "vuepress-plugin-container": "~2.1.5",
     "vuepress-plugin-reading-time": "~0.1.1",
