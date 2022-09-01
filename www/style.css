@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font: 120% monospace;
+}
+
+a {
+  color: rgb(99, 183, 175);
+  text-decoration: none;
+  background-image: linear-gradient(transparent 0%, transparent calc(50% - 1px), rgb(99, 183, 175) calc(50% - 1px), rgb(99, 183, 175) 100%);
+  background-size: 100% 200%;
+  word-break: break-word;
+  padding: 2px 0px 1px;
+  transition: background-position 120ms ease-in-out 0s, padding 120ms ease-in-out 0s;
+  background-position: 0px 0px;
+}
+
+a:hover {
+  background-position: 0px 100%;
+  color: #fff;
+}
+
+img {
+  margin-bottom: -6px;
+}
+
+.content {
+  padding: 5em 0;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
+
+.main-nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  margin: 2em 0;
+}
+
+
+.main-nav ul li a.icon-link {
+  background: none;
+  display: block;
+  position: relative;
+}
+
+.main-nav ul li a.icon-link .label {
+  position: absolute;
+  left: calc(50% - 150px / 2);
+  word-break: keep-all;
+  width: 150px;
+  top: calc(50% - 24px/2);
+  opacity: 0;
+  transition: opacity 120ms ease-in-out 0s;
+  color: black;
+}
+
+.main-nav ul li a:hover .label {
+  opacity: 1;
+}
+
+.main-nav ul li a svg {
+  width: 45px;
+  height: 45px;
+  transition: 120ms ease-in-out 0s;
+}
+
+.main-nav ul li a:hover svg {
+  filter: blur(1px);
+  opacity: 0.7;
+}
+
+.main-nav ul li a svg .logo {
+  transition: 120ms ease-in-out 0s;
+}
+
+
+.main-nav ul li a:hover svg.twitter .logo {
+  fill: rgb(29, 161, 242)
+}
+
+.main-nav ul li a:hover svg.github .logo {
+  fill: rgb(36, 41, 46)
+}
+
+.main-nav ul li a:hover svg.devto .logo {
+  fill: rgb(10, 10, 10)
+}
