@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/icon.astro';
+
+import photoOfAndrea from '../images/me.webp';
+---
+
+<style lang="scss">
+  .content {
+    padding: 5em 20px;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .main-nav {
+    margin: 5em 0;
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      list-style: none;
+      margin: 2em 0;
+      li {
+        margin: 0 10px;
+      }
+      a.icon-link {
+        background: none;
+        .label {
+          display: none;
+        }
+      }
+      a.blog-link {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: var(--text-color);
+        background-image: linear-gradient(
+          transparent 0%,
+          transparent 50%,
+          var(--text-color) 50%,
+          var(--text-color) 100%
+        );
+        &:hover {
+          color: rgb(255, 255, 255);
+        }
+      }
+    }
+  }
+
+  picture {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (prefers-color-scheme: dark) {
+    .main-nav ul li {
+      a {
+        svg .logo {
+          fill: rgb(255, 255, 255);
+        }
+        &:hover svg.github .logo {
+          fill: rgb(255, 255, 255);
+        }
+        &:hover svg.devto .logo {
+          fill: rgb(255, 255, 255);
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 620px) {
+    h1 {
+      font-size: 70px;
+    }
+    .summary {
+      font-size: 20px;
+    }
+  }
+</style>
+<BaseLayout>
+  <div class="content">
+    <h1>Andrea Canton</h1>
+    <div class="summary">
+      <h2>Vegetarian Fullstack Developer</h2>
+      <p>Based in Verona, Italy</p>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li>
+          <a href="https://twitter.com/andreacanton" class="icon-link">
+            <Icon name="twitter" />
+            <span class="label">twitter</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/andreacanton" class="icon-link">
+            <Icon name="github" />
+            <span class="label">github</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://dev.to/andreacanton" class="icon-link">
+            <Icon name="devto" />
+            <span class="label">dev.to</span>
+          </a>
+        </li>
+        <li>
+          <a href="/blog/" class="blog-link">blog</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <picture>
+    <img
+      src={photoOfAndrea}
+      alt="Andrea Canton Web Developer"
+      width="499"
+      height="499"
+    />
+  </picture>
+</BaseLayout>

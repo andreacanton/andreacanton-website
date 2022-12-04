@@ -10,7 +10,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  font: 120% monospace;
+  font: 100% monospace;
   min-height: 100vh;
 }
 
@@ -35,13 +35,17 @@ img {
 }
 
 .content {
-  padding: 5em 0;
+  padding: 5em 20px;
   text-align: center;
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 3.5em;
   margin-bottom: 0.5em;
+}
+
+.main-nav {
+  margin: 5em 0;
 }
 
 .main-nav ul {
@@ -52,6 +56,9 @@ h1 {
   margin: 2em 0;
 }
 
+.main-nav ul li a {
+  font-size: 1.5em;
+}
 
 .main-nav ul li a.icon-link {
   background: none;
@@ -64,10 +71,11 @@ h1 {
   left: calc(50% - 150px / 2);
   word-break: keep-all;
   width: 150px;
-  top: calc(50% - 24px/2);
+  top: calc(50% - 25px/2);
   opacity: 0;
   transition: opacity 120ms ease-in-out 0s;
   color: black;
+  text-shadow: 0 0 3px white;
 }
 
 .main-nav ul li a:hover .label {
@@ -100,4 +108,29 @@ h1 {
 
 .main-nav ul li a:hover svg.devto .logo {
   fill: rgb(10, 10, 10)
+}
+
+picture {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: rgb(255, 255, 255);
+    background: rgb(55, 55, 55);
+  }
+  .main-nav ul li a svg .logo{
+    fill: rgb(255,255,255)
+  }
+  .main-nav ul li a:hover svg.github .logo {
+    fill: rgb(255, 255, 255)
+  }
+
+  .main-nav ul li a:hover svg.devto .logo {
+    fill: rgb(255, 255, 255)
+  }
 }
