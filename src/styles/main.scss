@@ -8,8 +8,12 @@ $githubBrand: rgb(36, 41, 46);
 $devtoBrand: rgb(10, 10, 10);
 
 :root {
-  --text-color: $grey;
+  --dark-text-color: #{$darkGrey};
+  --text-color: #{$grey};
+  --light-text-color: #{$lightGrey};
   --background-color: rgb(255, 255, 255);
+  --accent: $accent;
+  --primary: $primary;
 }
 
 * {
@@ -68,7 +72,8 @@ h1 {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-color: rgb(200, 200, 200);
+    --text-color: #{$lightGrey};
+    --light-text-color: #{$grey};
     --background-color: rgb(0, 0, 0);
   }
 }
