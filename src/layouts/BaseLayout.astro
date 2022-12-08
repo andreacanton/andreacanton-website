@@ -1,11 +1,11 @@
 ---
 import '../styles/main.scss';
-const { frontmatter } = Astro.props;
 
-const pageTitle =
-  frontmatter?.title ?? 'Senior Fullstack Developer // Andrea Canton';
+const { title, description, canonicalUrl } = Astro.props;
+
+const pageTitle = title ?? 'Senior Fullstack Developer // Andrea Canton';
 const pageDescription =
-  frontmatter?.description ??
+  description ??
   'Website of Andrea Canton a vegetarian fullstack developer based in Verona, Italy.';
 ---
 
@@ -15,6 +15,14 @@ const pageDescription =
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {
+      canonicalUrl && (
+        <link
+          rel="canonical"
+          href={new URL(canonicalUrl, Astro.site).pathname}
+        />
+      )
+    }
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

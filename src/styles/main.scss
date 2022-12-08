@@ -32,6 +32,9 @@ body {
   min-height: 100vh;
   color: var(--text-color);
   background-color: var(--background-color);
+  & > main {
+    flex-grow: 2;
+  }
 }
 
 a {
@@ -49,27 +52,41 @@ a {
   transition: background-position 120ms ease-in-out 0s,
     padding 120ms ease-in-out 0s;
   background-position: 0px 0px;
+  &:hover {
+    background-position: 0px 100%;
+    color: rgb(255, 255, 255);
+  }
 }
 
-a:hover {
-  background-position: 0px 100%;
-  color: rgb(255, 255, 255);
+a.no-effects,
+h1 a,
+h2 a {
+  background: none;
+  &:hover {
+    background: none;
+  }
 }
 
 img {
   margin-bottom: -6px;
 }
 
-.content {
-  padding: 5em 20px;
-  text-align: center;
-}
-
 h1 {
   font-size: 3.5em;
   margin-bottom: 0.5em;
 }
-
+h2 {
+  font-size: 2.2em;
+  margin-bottom: 1em;
+}
+p {
+  line-height: 1.7;
+  margin-bottom: 1.5em;
+  font-size: 1.2em;
+  img {
+    width: 100%;
+  }
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: #{$lightGrey};

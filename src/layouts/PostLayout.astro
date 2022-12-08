@@ -1,0 +1,26 @@
+---
+import BlogLayout from './BlogLayout.astro';
+import ArticleDate from '../components/article-date.astro';
+const { frontmatter } = Astro.props;
+---
+
+<style lang="scss">
+  main {
+    padding: 0 20px 20px;
+  }
+  @media screen and (min-width: 620px) {
+    main {
+      width: 600px;
+      padding: 0;
+    }
+  }
+</style>
+<BlogLayout title={`${frontmatter.title} / Andrea Canton`}>
+  <main>
+    <div class="meta">
+      <ArticleDate date={frontmatter.date} />
+    </div>
+    <h1>{frontmatter.title}</h1>
+    <slot />
+  </main>
+</BlogLayout>

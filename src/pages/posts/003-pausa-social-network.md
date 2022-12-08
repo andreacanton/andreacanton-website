@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 date: 2020-06-26
 title: Ho messo in pausa i social network per un mese
 image: /posts/lazise.jpg
@@ -6,7 +7,7 @@ tags: social, annoiarsi, creatività
 canonicalUrl: https://andreacanton.dev/blog/003-pausa-social-network.html
 ---
 
-Ho iniziato questo percorso pensando di non avere un grosso problema con l'uso dei social network. Ma ultimamente ho notato che mi corico a letto e non posso fare a meno di guardare il telefono, addormentandomi tardi e svegliandomi male, intaccando [le mie abitudini mattutine](/blog/abitudini-mattutine.html).
+Ho iniziato questo percorso pensando di non avere un grosso problema con l'uso dei social network. Ma ultimamente ho notato che mi corico a letto e non posso fare a meno di guardare il telefono, addormentandomi tardi e svegliandomi male, intaccando le mie abitudini mattutine.
 
 Un caro ex-collega mi ha fatto osservare che il gesto di scroll con il dito sul telefono è un comportamento che non avevamo prima dell'arrivo degli smartphone. È un gesto che identifica l'ultimo decennio.
 

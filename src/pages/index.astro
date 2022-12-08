@@ -6,7 +6,11 @@ import photoOfAndrea from '../images/me.webp';
 ---
 
 <style lang="scss">
-  .content {
+  body {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .top-content {
     padding: 5em 20px;
     text-align: center;
   }
@@ -82,7 +86,7 @@ import photoOfAndrea from '../images/me.webp';
   }
 </style>
 <BaseLayout>
-  <div class="content">
+  <main class="top-content">
     <h1>Andrea Canton</h1>
     <div class="summary">
       <h2>Vegetarian Fullstack Developer</h2>
@@ -113,7 +117,7 @@ import photoOfAndrea from '../images/me.webp';
         </li>
       </ul>
     </nav>
-  </div>
+  </main>
   <picture>
     <img
       src={photoOfAndrea}
