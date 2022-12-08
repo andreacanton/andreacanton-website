@@ -1,0 +1,119 @@
+---
+import Icon from '../components/icon.astro';
+
+import photoOfAndrea from '../images/me_thumb.webp';
+---
+
+<style lang="scss">
+  .main-header {
+    padding: 10px 0;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-color);
+
+    a.logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      font-size: block 30px;
+      font-weight: 700;
+      transition: color 120ms ease-in-out;
+      background: none;
+      flex-grow: 2;
+      font-size: 2.3em;
+      color: var(--text-color);
+      picture img {
+        border-radius: 50%;
+        border: 2px solid var(--text-color);
+        margin-right: 15px;
+        transition: border-color 120ms ease-in-out;
+      }
+
+      &:hover {
+        color: var(--light-text-color);
+        picture img {
+          border-color: var(--light-text-color);
+        }
+      }
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      li {
+        margin: 0 15px;
+        a {
+          background: none;
+          span {
+            display: none;
+          }
+          svg {
+            width: 45px;
+            height: 45px;
+            transition: 120ms ease-in-out 0s;
+            .logo {
+              transition: 120ms ease-in-out 0s;
+            }
+            &.twitter .logo {
+              fill: rgb(29, 161, 242);
+            }
+            &.github .logo {
+              fill: rgb(36, 41, 46);
+            }
+            &.devto .logo {
+              fill: rgb(10, 10, 10);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 620px) {
+    .main-header {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 600px;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text-color: rgb(255, 255, 255);
+    }
+  }
+</style>
+<header class="main-header">
+  <a class="logo" href="/">
+    <picture>
+      <img src={photoOfAndrea} alt="Andrea Canton - Web Developer" />
+    </picture>
+    <span>Andrea Canton</span>
+  </a>
+  <nav>
+    <ul>
+      <li>
+        <a href="https://twitter.com/andreacanton" class="icon-link">
+          <Icon name="twitter" />
+          <span class="label">twitter</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/andreacanton" class="icon-link">
+          <Icon name="github" />
+          <span class="label">github</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://dev.to/andreacanton" class="icon-link">
+          <Icon name="devto" />
+          <span class="label">dev.to</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
