@@ -87,6 +87,11 @@ p {
     width: 100%;
   }
 }
+ul,
+ol {
+  font-size: 1.2em;
+  padding: 10px;
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: #{$lightGrey};
