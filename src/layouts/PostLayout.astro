@@ -1,0 +1,58 @@
+---
+import BlogLayout from './BlogLayout.astro';
+import ArticleDate from '../components/article-date.astro';
+import Frontmatter from '../interfaces/Frontmatter';
+let { frontmatter } = Astro.props;
+frontmatter = frontmatter as Frontmatter;
+
+const url = `${frontmatter?.canonicalUrl}`;
+const text = `${url} via @andreacanton`;
+const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURI(
+  text
+)}`;
+---
+
+<style lang="scss">
+  main {
+    padding: 0 20px 20px;
+  }
+  footer {
+    border-top: 8px solid var(--grey);
+    padding: 2em 0 0;
+    //margin: 1em 0;
+  }
+  @media screen and (min-width: 620px) {
+    main,
+    footer {
+      width: 600px;
+    }
+  }
+</style>
+<BlogLayout title={`${frontmatter.title} ~ Andrea Canton`}>
+  <main>
+    <div class="meta">
+      <ArticleDate date={frontmatter.date} />
+    </div>
+    <h1>{frontmatter.title}</h1>
+    <slot />
+  </main>
+  <footer>
+    <p>
+      Ti ringrazio per aver dedicato del tempo per leggere una parte della mia
+      opinione sulla vita, l'universo e tutto quanto. Se ti sembra che abbia
+      detto qualcosa di sbagliato, o vuoi semplicemente dire la tua verità,
+      <a href={twitterShareUrl}>fammelo sapere con un tweet</a>.
+    </p>
+    <p>
+      Ok dai, puoi
+      <a href="/blog/">leggere altri articoli</a>.
+    </p>
+    {
+      frontmatter.lastUpdate && (
+        <p class="last-update">
+          Ultimo aggiornamento: {frontmatter.lastUpdate}
+        </p>
+      )
+    }
+  </footer>
+</BlogLayout>

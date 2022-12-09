@@ -1,0 +1,59 @@
+---
+import '../styles/main.scss';
+
+const { title, description, canonicalUrl } = Astro.props;
+
+const pageTitle = title ?? 'Senior Fullstack Developer // Andrea Canton';
+const pageDescription =
+  description ??
+  'Website of Andrea Canton a vegetarian fullstack developer based in Verona, Italy.';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {
+      canonicalUrl && (
+        <link
+          rel="canonical"
+          href={new URL(canonicalUrl, Astro.site).pathname}
+        />
+      )
+    }
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="description" content={pageDescription} />
+    <meta property="og:site_name" content="Andrea Canton" />
+    <meta property="og:title" content="Personal website of Andrea Canton" />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://andreacanton.dev/" />
+    <meta
+      property="og:image"
+      content="https://andreacanton.dev/images/andrea-canton-og.jpg"
+    />
+    <meta name="twitter:title" content="Personal website of Andrea Canton" />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:url" content="https://andreacanton.dev/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://andreacanton.dev/images/andrea-canton-og.jpg"
+    />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>

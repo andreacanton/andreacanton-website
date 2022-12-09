@@ -1,0 +1,104 @@
+$grey: rgb(112, 112, 112);
+$lightGrey: rgb(200, 200, 200);
+$darkGrey: rgb(55, 55, 55);
+$accent: rgb(99, 183, 175);
+$primary: rgb(242, 125, 0);
+$twitterBrand: rgb(29, 161, 242);
+$githubBrand: rgb(36, 41, 46);
+$devtoBrand: rgb(10, 10, 10);
+
+:root {
+  --dark-text-color: #{$darkGrey};
+  --text-color: #{$grey};
+  --light-text-color: #{$lightGrey};
+  --background-color: rgb(255, 255, 255);
+  --accent: $accent;
+  --primary: $primary;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font: 18px monospace;
+  min-height: 100vh;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  & > main {
+    flex-grow: 2;
+  }
+}
+
+a {
+  color: $accent;
+  text-decoration: none;
+  background-image: linear-gradient(
+    transparent 0%,
+    transparent calc(50% - 1px),
+    $accent calc(50% - 1px),
+    $accent 100%
+  );
+  background-size: 100% 200%;
+  word-break: break-word;
+  padding: 2px 0px 1px;
+  transition: background-position 120ms ease-in-out 0s,
+    padding 120ms ease-in-out 0s;
+  background-position: 0px 0px;
+  &:hover {
+    background-position: 0px 100%;
+    color: rgb(255, 255, 255);
+  }
+}
+
+a.no-effects,
+h1 a,
+h2 a {
+  background: none;
+  &:hover {
+    background: none;
+  }
+}
+
+img {
+  margin-bottom: -6px;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+h2 {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+p {
+  line-height: 1.7;
+  margin-bottom: 1.5em;
+  img {
+    width: 100%;
+  }
+}
+ul,
+ol {
+  padding: 20px 40px;
+}
+blockquote {
+  padding: 20px;
+  font-style: italic;
+  border-left: 5px solid var(--light-gray);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #{$lightGrey};
+    --light-text-color: #{$grey};
+    --background-color: rgb(0, 0, 0);
+  }
+}

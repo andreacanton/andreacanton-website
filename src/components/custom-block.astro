@@ -1,0 +1,21 @@
+---
+const { title } = Astro.props;
+const theTitle = title ?? 'tip';
+---
+
+<style lang="scss">
+  .custom-block {
+    padding: 0.1rem 1.5rem;
+    margin: 1rem 0;
+    background: rgba(242, 125, 0, 0.1);
+  }
+  .custom-block-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    line-height: 4;
+  }
+</style>
+<div class="custom-block">
+  <div class="custom-block-title">{theTitle}</div>
+  <slot />
+</div>

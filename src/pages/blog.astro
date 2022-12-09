@@ -1,0 +1,87 @@
+---
+import BlogLayout from '../layouts/BlogLayout.astro';
+import ArticleDate from '../components/article-date.astro';
+import Frontmatter from '../interfaces/Frontmatter';
+const allPosts = await Astro.glob<Frontmatter>('./posts/*.mdx');
+
+const listedPosts = allPosts
+  .filter((p) => !p.frontmatter.draft)
+  .sort((p1, p2) => {
+    if (p1.frontmatter.date === p2.frontmatter.date) {
+      return 0;
+    }
+    return p1.frontmatter.date > p1.frontmatter.date ? 1 : -1;
+  });
+
+const description = `Ciao! Questo mio blog in italiano, faccio riflessioni e riporto
+      esperienze. Mi piace scrivere, ma non ho ancora trovato il mio ritmo per
+      essere costante.`;
+---
+
+<style lang="scss">
+  main {
+    padding: 0 20px 20px;
+  }
+  .intro {
+    margin: 1.5em 0 3em;
+  }
+  .articles-listing {
+    article {
+      font-family: monospace;
+      margin-bottom: 3em;
+      h2 {
+        font-size: 1.8em;
+        margin: 0;
+        a {
+          text-decoration: none;
+          color: var(--text-color);
+          transition: color 120ms ease-in-out;
+          &:hover {
+            color: var(--dark-text-color);
+          }
+        }
+      }
+      .tags {
+        font-size: 0.7em;
+        opacity: 0.7;
+        margin: 1em 0 0;
+      }
+    }
+  }
+  @media screen and (min-width: 620px) {
+    main {
+      width: 600px;
+      padding: 0;
+    }
+    .articles-listing article h2 {
+      font-size: 2.8em;
+    }
+  }
+</style>
+<BlogLayout title="Blog ~ Andrea Canton" description={description}>
+  <main>
+    <p class="intro">
+      {description}
+    </p>
+    <p class="intro">
+      Ecco gli ultimi (e unici) {listedPosts.length} articoli che ho scritto e pubblicato.
+    </p>
+    <section class="articles-listing">
+      {
+        listedPosts.map((post) => (
+          <article>
+            <div class="meta">
+              <ArticleDate date={post.frontmatter.date} />
+            </div>
+            <h2>
+              <a href={post.url}>{post.frontmatter.title}</a>
+            </h2>
+            {post.frontmatter.tags && (
+              <p class="tags">{post.frontmatter.tags}</p>
+            )}
+          </article>
+        ))
+      }
+    </section>
+  </main>
+</BlogLayout>

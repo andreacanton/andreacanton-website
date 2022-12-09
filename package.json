@@ -1,11 +1,12 @@
 {
   "name": "andreacanton-website",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "The personal website of Andrea Canton an average human being, web developer, vegetarian based in Verona area, Italy EU.",
-  "main": "index.js",
   "scripts": {
-    "dev": "vuepress dev",
-    "build": "vuepress build"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "repository": {
     "type": "git",
@@ -21,15 +22,13 @@
     "url": "https://github.com/andreacanton/andreacanton-website/issues"
   },
   "homepage": "https://andreacanton.dev",
-  "devDependencies": {
-    "vuepress": "^1.9.7",
-    "vuepress-plugin-container": "~2.1.5",
-    "vuepress-plugin-reading-time": "~0.1.1",
-    "vuepress-plugin-seo": "~0.2.0"
-  },
   "dependencies": {
-    "date-fns": "~2.28.0",
-    "normalize-styl": "~8.0.1",
-    "vuepress-plugin-sitemap": "~2.3.1"
+    "@astrojs/mdx": "^0.12.1",
+    "astro": "^1.6.1",
+    "sass": "^1.55.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "prettier-plugin-astro": "^0.7.0"
   }
 }
