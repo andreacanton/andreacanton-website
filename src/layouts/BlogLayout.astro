@@ -5,7 +5,24 @@ import Topbar from '../components/topbar.astro';
 const { title, description } = Astro.props;
 ---
 
+<style lang="scss">
+  footer {
+    font-size: 0.7em;
+    padding: 20px;
+  }
+</style>
 <BaseLayout title={title} description={description}>
   <Topbar />
   <slot />
+  <footer>
+    Build with Astro - Hosted by Netlify -
+    <a href="https://github.com/andreacanton/andreacanton.com" target="_blank"
+      >github repo</a
+    >
+    - All content is under
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank"
+      >CC BY-SA 4.0</a
+    >
+    license
+  </footer>
 </BaseLayout>
