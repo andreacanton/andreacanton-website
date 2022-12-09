@@ -1,12 +1,13 @@
 ---
 const { date } = Astro.props;
-const theDate = new Date(date).toLocaleDateString();
+
+const formattedDate = new Intl.DateTimeFormat('it-IT', {
+  dateStyle: 'medium',
+  timeZone: 'Europe/Rome',
+}).format(new Date(date));
 ---
 
 <style lang="scss">
-  .article-date {
-    font-size: 1.2em;
-  }
   .date {
     width: 1.3em;
     height: 1.3em;
@@ -29,5 +30,5 @@ const theDate = new Date(date).toLocaleDateString();
       d="M21 3h-3V1h-2v2H8V1H6v2H3v18h18V3zm-2 16H5V8h14v11zM7 10h5v5H7v-5z"
     ></path>
   </svg>
-  {theDate}
+  <time datetime={date}>{formattedDate}</time>
 </span>

@@ -23,6 +23,7 @@
   },
   "homepage": "https://andreacanton.dev",
   "dependencies": {
+    "@astrojs/mdx": "^0.12.1",
     "astro": "^1.6.1",
     "sass": "^1.55.0"
   },
