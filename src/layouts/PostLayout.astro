@@ -5,8 +5,7 @@ import Frontmatter from '../interfaces/Frontmatter';
 let { frontmatter } = Astro.props;
 frontmatter = frontmatter as Frontmatter;
 
-const url = `${frontmatter?.canonicalUrl}`;
-const text = `${url} via @andreacanton`;
+const text = `${frontmatter.canonicalUrl} via @andreacanton`;
 const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURI(
   text
 )}`;
@@ -28,7 +27,10 @@ const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURI(
     }
   }
 </style>
-<BlogLayout title={`${frontmatter.title} ~ Andrea Canton`}>
+<BlogLayout
+  title={`${frontmatter.title} ~ Andrea Canton`}
+  canonicalUrl={frontmatter.canonicalUrl}
+>
   <main>
     <div class="meta">
       <ArticleDate date={frontmatter.date} />
