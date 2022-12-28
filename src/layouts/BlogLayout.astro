@@ -33,18 +33,20 @@ const { title, description } = Astro.props;
   <Topbar />
   <slot />
   <footer>
-    <p>
-      Build with Astro - Hosted by Netlify -
-      <a href="https://github.com/andreacanton/andreacanton.com" target="_blank"
-        >github repo</a
-      >
-    </p>
-    <p>
-      All content is under
-      <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank"
-        >CC BY-SA 4.0</a
-      >
-      license
-    </p>
+    Build with <span class="notranslate">Astro</span> - Hosted by <span
+      class="notranslate">Netlify</span
+    > -
+    <a
+      href="https://github.com/andreacanton/andreacanton-website"
+      class="notranslate"
+      target="_blank">github repo</a
+    >
+    - All content is under
+    <a
+      href="https://creativecommons.org/licenses/by-sa/4.0/"
+      class="notranslate"
+      target="_blank">CC BY-SA 4.0</a
+    >
+    license
   </footer>
 </BaseLayout>
