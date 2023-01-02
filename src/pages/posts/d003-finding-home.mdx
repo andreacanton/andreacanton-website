@@ -1,0 +1,73 @@
+---
+layout: ../../layouts/PostLayout.astro
+date: 2022-01-02
+title: Web scraping with Deno
+tags: web-scraping, deno, mongo
+canonicalUrl: https://andreacanton.dev/posts/d003-finding-home/
+---
+
+Finding a house is hard. _Finding your home_ is harder.
+
+So during this holidays, I though that I should **build a scraper** to gather data from real estate websites.
+
+This seems be an overkill solution, but the initial aim is to practice with Deno and MongoDB.
+Plus, I read many [other](https://mattrighetti.com/2022/04/05/i-need-to-find-an-appartment.html) [articles](https://towardsdatascience.com/web-scraping-apartment-listings-in-stockholm-3fcebacf8be6) where other tried and found it useful, so maybe will be for me.
+
+Gathering data is only a part of _the game_, I know, but for now let me focus on that.
+
+My approach was to elude bot-blocking policies with least effort, but without flood the website with requests.
+
+For example I added some work, like traversing html and saving on database, or a waiting time after each request.
+
+Deno doesn't have a proper `sleep` function and `setTimeout` doesn't work asyncronusly, so here the method i found to sleep asyncronously (and randomly).
+
+```ts
+const delay = Math.ceil(Math.rand() * 5000); // random milliseconds - max 5 seconds
+await new Promise((r) => setTimeout(r, delay)); // the waiting promise.
+```
+
+To elude bot-blocking policies, I ended up to buy a vpn plan subcription.
+But maybe it didn't worth it. Let me explain.
+
+In italy we have some websites with real estate ads, I started with what I think were the main one: immobiliare.it and _CENSORED_.
+
+To do HTML traversing and gather data, I used [cheerio](https://deno.land/x/cheerio) a jquery-like library for node and Deno.
+
+Immobiliare.it were a peace of cake, `await fetch('immobiliare.it/whatever')` does not trigger anything. In the single ad page there was a json object with all the data of the house.
+
+On the other hand on _CENSORED_ after few requests `403 Forbidden` errors where given.
+
+What does it mean do request with `fetch` only? For any webserver the request is clearly from automation:
+
+- No user-agent at all.
+- No JS, so it load only what you can see on "View page source".
+- No cookies
+
+So I needed a headless browser. A proper browser without interface.
+
+[Puppeteer](https://deno.land/x/puppeteer) is library to run headless Chrome or Firefox and is ported in Deno by [Luca Casonato](https://lcas.dev/). So with this lib I can address this problems one by one.
+
+The easy-one was to run the js and wait that the document end loading.
+
+```ts
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+await page.goto('https://*CENSORED*/whatever', {
+  waitUntil: 'domcontentloaded',
+});
+```
+
+In many articles with best practice to scraping they say: **rotate useragent**.
+After some research I've found this [API](https://github.com/Denoed/UserAgents) that gave a json with the percentage of useragent used in the world. So randomly I select a user agent from those that shoud pass always the [faking user agent test](https://i-know-you-faked-user-agent.glitch.me/)
+
+After that nothing seems working with _CENSORED_, it always gave me 403 response. So I thought that my IP was compromised.
+
+At that point I've come to conclusion that I need some proxies and a VPN cames along: I choosed [Mullvad VPN](https://mullvad.net), 5€/month and come with a CLI useful for automation, [not a sponsor](https://mullvad.net/en/help/policy-reviews-advertising-and-affiliates/).
+
+After a while, I ended up on the _CENSORED_ website with [my regular browser](https://www.mozilla.org/en-US/firefox/new/) and after asking me to solve a captcha it got me in to the website freely. From the scraper it continued to give me 403.
+
+**So let's copy all the cookies!**. After copy all the non-session cookies from my browser, even disconnected from VPN, the scraper works.
+
+Thank you Immobiliare.it, because you made my life easer the first time I tried to scrape.
+Thank you _CENSORED_, because you gave me some interesting challenge and dig deeper in the scraping world.
+Anyhow I had to remove the name of the second website because have explicit in his term of service to exclude scraping, anyhow thank you for not sue me...for now.

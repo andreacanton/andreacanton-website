@@ -1,0 +1,105 @@
+---
+layout: ../../layouts/PostLayout.astro
+date: 2020-02-19
+title: GIT Mantras you should know
+tags: codequality, git, healtydebate
+canonicalUrl: https://andreacanton.dev/posts/d001-git-mantras/
+---
+
+_DISCLAIMER: This post is my personal opinion, feel free to comment if you disagree._
+
+I wrote the first line of code in 2007 and one of the main tools I used over the years is GIT. I studied various ways of thinking and encountered many problems caused by misusing this fundamental tool. So I wrote some thoughts I learned on the field, hopefully, to help you to be more confident and professional.
+
+## Use a VCS even if you are the only coder
+
+The first job I had was a mess from many points of view. One of those was they don't use any version control system. The excuse of the head developer was "we are only in three and work always on different projects". He didn't understand that GIT (or other VCS) works as a time machine for your code and is useful even if you are the only coder in the team. And if you're asking: yes, it happened we have to work on the same project, in a rush.
+
+## Make useful commits
+
+You should treat your commit like you treat your code (assuming you want a clean code) because if you don't keep neat your commits and branches, your repository became useless and unreliable.
+One of the most trendy GIT 'motto' is [_Commit Early And Often_](https://sethrobertson.github.io/GitBestPractices/#commit).
+I think a better rule can be: **Make _frequent_ commits with a short description.** Even more precisely:
+
+> The first line of commit should be less than 50 characters, in plain English and should describe an action in simple present. Should not contain words like "and" or "+", in most cases you should split into two commits.
+
+Examples:
+
+- add about page file
+- implements contacts saving logic
+- remove commented code in invoice service
+- intent code in the database config file
+
+Of course, your commit should be as descriptive as possible. I've seen a lot commits with only written "wip" or "fix": please, simply _don't_.
+
+> Ok thanks, but how can I do those commits???
+
+## Don't be afraid to use a graphic interface (GUI)
+
+I'm a huge fan of GIT CLI, I mostly use it but in some cases, I use an interface to easily select which files (or even lines) to commit. Instead to use `git add -p`
+Yes, because _frequent_ doesn't mean to commit every five minutes. When you are in a rush, or you are focused to solve a problem, you can easily forget to commit early and often. So when you notice that, you can open your GUI and make your commits.
+
+It doesn't matter if a test is failing or your branch is broken. Unless you are on the production branch, it's better to have more descriptive commits that can help you to debug or find a deleted feature, than working commits.
+
+Here some GUI i've used/use:
+
+- [Sublime Merge](https://www.sublimemerge.com/)
+- [Sourcetree](https://www.sourcetreeapp.com/)
+- [GitKraken](https://www.gitkraken.com/)
+- [SmartGit](https://www.syntevo.com/smartgit/)
+- [VSCode](https://code.visualstudio.com/docs/editor/versioncontrol)
+- [Visual Studio](https://visualstudio.microsoft.com/it/vs/features/collaborate/) have a simpler but useful interface
+
+## Why I should use English only for my commits?
+
+Let's take an example, a realistic example.
+Your job is in a firm that produces e-commerce websites for other clients in Magento. At some point tons of work arrive and you and your team can't keep up to developing a lot of code. So your boss decides to hire remote developers from India.
+Now your code and your git have to be read from foreign developers. Imagine if the code and git commits are all in Italian/Spanish/German/French/Finnish/etc. You and your team will be poked every minute by your foreign co-workers to explain your repository.
+
+![Family Guy Italian](https://media1.tenor.com/images/acf01d316a136a9f339a15862516c282/tenor.gif?itemid=13873621)
+
+Another plus is English is usually shorter and without special characters.
+
+> (en) "add about page file"
+> (it) "aggiunge il file della pagina chi siamo"
+> (es) "agrega el archivo de la página sobre nosotros"
+> (de) "fügt die Auslagerungsdatei über uns hinzu"
+
+> (en) "implement contacts saving logic"
+> (it) "implementa la logica del salvataggio dei contatti"
+> (es) "implementa la lógica de ahorro de contactos"
+> (de) "implementiert die Logik des Speicherns von Kontakten"
+
+## Use distinct branches for each feature or issue
+
+I suggest you should use [GIT flow](https://danielkummer.github.io/git-flow-cheatsheet/) to manage your feature/issue branches. So you can experiment on a new feature, without losing the chance to make a hotfix on the production branch (master).
+
+![Fixing bug in production](https://thumbs.gfycat.com/UnevenAbsoluteAustraliansilkyterrier-size_restricted.gif)
+
+Look at [this article](https://nvie.com/posts/a-successful-git-branching-model/) for more informations
+
+## Repeat with me: `git pull --rebase`
+
+When you work in a team on a single branch (like a release branch) it happened quite often that you make a commit but someone pushes another commit before you, so you should pull before pushing. If you don't use the `--rebase` flag, git will create a merge commit, a _useless and confusing_ merge commit.
+Instead, if you use the `--rebase` option that's what occurs:
+
+1. your commit(s) is(are) put aside
+2. the remote commits are pulled
+3. (one at a time) your commit(s) is(are) applied on top of the updated branch
+4. if conflicts occur the rebase stop, you solve the conflict and stage the files, then launch `git rebase --continue`
+5. if there are no more commit finish, otherwise return to point 3.
+
+Most of the time I never solve conflicts, so the rebase goes straight forward and then I push my commit(s). Notice that the conflicts part will have occurred anyway with the standard pull/merge process.
+
+There are some _negligible downside_ of this practice: all the timestamp of your commit(s) will be updated when you do the rebase if you have more commits you may have to solve conflicts every time a commit will be applied. Anyhow in most cases, you push commits after you make it, so those problems are almost irrelevant.
+
+## Ok but why should I care?
+
+If you care you sound more professional and you'll benefit in the future:
+
+- You can delete all the commented code sure of cherry-picking from the past if the client wants a feature back.
+- You can easily debug your code with [`git bisect`](https://git-scm.com/docs/git-bisect).
+
+If you found this article useful, please consider sharing this article with your colleagues.
+
+Like this article, if you like it! [Feel free to say how crazy I sound on twitter](https://twitter.com/intent/tweet?text=I%20think%20@andreacanton%20sound%20crazy%20%23DEVcommunity%20https://dev.to/andreacanton/git-mantras-you-should-know-1lfd-temp-slug-5426745/).
+There aren't stupid questions or comments: let me know your GIT mantra or your best practices, I'll respond to all of your comments!
