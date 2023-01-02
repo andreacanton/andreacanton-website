@@ -95,10 +95,24 @@ blockquote {
   font-style: italic;
   border-left: 5px solid var(--light-gray);
 }
+.astro-code {
+  margin: 2em 0;
+  padding: 30px;
+}
+code {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+pre code {
+  background: none;
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: #{$lightGrey};
     --light-text-color: #{$grey};
     --background-color: rgb(0, 0, 0);
+  }
+  code {
+    background: rgba(255, 255, 255, 0.4);
   }
 }

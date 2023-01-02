@@ -13,9 +13,7 @@ const listedPosts = allPosts
     return p1.frontmatter.date > p1.frontmatter.date ? 1 : -1;
   });
 
-const description = `Ciao! Questo mio blog in italiano, faccio riflessioni e riporto
-      esperienze. Mi piace scrivere, ma non ho ancora trovato il mio ritmo per
-      essere costante.`;
+const description = `Hi! This is my personal blog. Here you can find some articles about life, software development and something about me. First thing about me: I'm not constant in writing and I don't remember how many times I've started a blog.`;
 ---
 
 <style lang="scss">
@@ -64,7 +62,11 @@ const description = `Ciao! Questo mio blog in italiano, faccio riflessioni e rip
       {description}
     </p>
     <p class="intro">
-      Ecco gli ultimi (e unici) {listedPosts.length} articoli che ho scritto e pubblicato.
+      If you want to contact me, send an email to andreacanton [at] duck [dot]
+      com.
+    </p>
+    <p class="intro">
+      Here my only {listedPosts.length} articles I've published.
     </p>
     <section class="articles-listing">
       {
