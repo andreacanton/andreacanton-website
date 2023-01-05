@@ -110,6 +110,7 @@ blockquote {
 .astro-code {
   margin: 2em 0;
   padding: 30px;
+  width: calc(100vw - 100px);
 }
 p code {
   background: rgba(0, 0, 0, 0.4);
