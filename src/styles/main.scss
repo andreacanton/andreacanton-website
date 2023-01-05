@@ -113,10 +113,10 @@ blockquote {
   width: calc(100vw - 100px);
 }
 p code {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.2);
   font-size: 0.8em;
   padding: 0 2px;
-  border-radius: 5%;
+  border-radius: 2px;
 }
 
 pre code {
@@ -130,5 +130,11 @@ pre code {
   }
   p code {
     background: rgba(255, 255, 255, 0.4);
+  }
+}
+
+@media screen and (min-width: 620px) {
+  .astro-code {
+    width: auto;
   }
 }
