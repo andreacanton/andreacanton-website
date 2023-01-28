@@ -12,7 +12,7 @@ const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURI(
 ---
 
 <style lang="scss">
-  .meta { 
+  .meta {
     font-family: monospace;
   }
   main {
@@ -33,6 +33,7 @@ const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURI(
 <BlogLayout
   title={`${frontmatter.title} ~ Andrea Canton`}
   canonicalUrl={frontmatter.canonicalUrl}
+  description={frontmatter.description}
 >
   <main>
     <div class="meta">
