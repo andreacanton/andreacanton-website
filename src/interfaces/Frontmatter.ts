@@ -6,4 +6,5 @@ export default interface Frontmatter {
   canonicalUrl?: string;
   draft?: boolean;
   lastUpdate?: Date;
+  description?: string;
 }
