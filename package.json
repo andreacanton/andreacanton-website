@@ -1,5 +1,6 @@
 {
   "name": "andreacanton-website",
+  "type": "module",
   "version": "2.0.0",
   "description": "The personal website of Andrea Canton an average human being, web developer, vegetarian based in Verona area, Italy EU.",
   "scripts": {
@@ -24,6 +25,7 @@
   "homepage": "https://andreacanton.dev",
   "dependencies": {
     "@astrojs/mdx": "^0.17.2",
+    "@astrojs/netlify": "^2.1.3",
     "astro": "^2.0.17",
     "sass": "^1.58.3"
   },
