@@ -7,4 +7,5 @@ export default interface Frontmatter {
   draft?: boolean;
   lastUpdate?: Date;
   description?: string;
+  subtitle?: string;
 }

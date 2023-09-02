@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/icon.astro';
 
 import photoOfAndrea from '../images/me.webp';
+import { Image } from 'astro:assets';
 ---
 
 <style lang="scss">
@@ -119,7 +120,7 @@ import photoOfAndrea from '../images/me.webp';
     </nav>
   </main>
   <picture>
-    <img
+    <Image
       src={photoOfAndrea}
       alt="Andrea Canton Web Developer"
       width="499"

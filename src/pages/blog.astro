@@ -77,6 +77,9 @@ const description = `Hi! This is my personal blog. Here you can find some articl
             <h2>
               <a href={post.url}>{post.frontmatter.title}</a>
             </h2>
+            {post.frontmatter.subtitle && (
+              <p class="subtitle">{post.frontmatter.subtitle}</p>
+            )}
             {post.frontmatter.tags && (
               <p class="tags">{post.frontmatter.tags}</p>
             )}

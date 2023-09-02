@@ -15,6 +15,9 @@ const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURI(
   .meta {
     font-family: monospace;
   }
+  .subtitle {
+    font-size: 1.2em;
+  }
   main {
     padding: 0 20px 20px;
   }
@@ -40,6 +43,13 @@ const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURI(
       <ArticleDate date={frontmatter.date} />
     </div>
     <h1>{frontmatter.title}</h1>
+    {
+      frontmatter.subtitle && (
+        <p class="subtitle">
+          {frontmatter.subtitle}
+        </p>
+      )
+    }
     <slot />
   </main>
   <footer>
