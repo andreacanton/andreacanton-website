@@ -24,12 +24,13 @@
   },
   "homepage": "https://andreacanton.dev",
   "dependencies": {
-    "@astrojs/mdx": "^1.0.0",
-    "@astrojs/netlify": "^3.0.0",
-    "astro": "^3.0.6",
-    "sass": "^1.66.1"
+    "@astrojs/mdx": "^1.1.2",
+    "@astrojs/netlify": "^3.0.3",
+    "astro": "^3.3.2",
+    "sass": "^1.69.4"
   },
   "devDependencies": {
+    "bun-types": "^1.0.6",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.0"
   }
