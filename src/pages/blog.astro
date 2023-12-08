@@ -1,7 +1,7 @@
 ---
 import BlogLayout from '../layouts/BlogLayout.astro';
 import ArticleDate from '../components/article-date.astro';
-import Frontmatter from '../interfaces/Frontmatter';
+import type Frontmatter from '../interfaces/Frontmatter';
 const allPosts = await Astro.glob<Frontmatter>('./posts/*.mdx');
 
 const listedPosts = allPosts

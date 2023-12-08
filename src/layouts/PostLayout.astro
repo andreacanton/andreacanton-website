@@ -1,14 +1,9 @@
 ---
 import BlogLayout from './BlogLayout.astro';
 import ArticleDate from '../components/article-date.astro';
-import Frontmatter from '../interfaces/Frontmatter';
+import type Frontmatter from '../interfaces/Frontmatter';
 let { frontmatter } = Astro.props;
 frontmatter = frontmatter as Frontmatter;
-
-const text = `${frontmatter.canonicalUrl} via @andreacanton`;
-const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURI(
-  text
-)}`;
 ---
 
 <style lang="scss">
@@ -43,19 +38,13 @@ const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURI(
       <ArticleDate date={frontmatter.date} />
     </div>
     <h1>{frontmatter.title}</h1>
-    {
-      frontmatter.subtitle && (
-        <p class="subtitle">
-          {frontmatter.subtitle}
-        </p>
-      )
-    }
+    {frontmatter.subtitle && <p class="subtitle">{frontmatter.subtitle}</p>}
     <slot />
   </main>
   <footer>
     <p>
       Write me to andreacanton [at] duck [dot] com. <br />
-      Ok, now you can <a href="/blog/">read other articles</a>.
+       Ok, now you can <a href="/blog/">read other articles</a>.
     </p>
     {
       frontmatter.lastUpdate && (
