@@ -27,7 +27,7 @@
     "@astrojs/check": "^0.9.3",
     "@astrojs/mdx": "^3.1.4",
     "@astrojs/netlify": "^5.5.1",
-    "astro": "^ 4.14.4",
+    "astro": "^ 4.16.18",
     "sass": "^1.77.8",
     "typescript": "^5.5.4"
   },
