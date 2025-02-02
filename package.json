@@ -1,7 +1,7 @@
 {
   "name": "andreacanton-website",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "The personal website of Andrea Canton an average human being, web developer, vegetarian based in Verona area, Italy EU.",
   "scripts": {
     "dev": "astro dev",
@@ -23,16 +23,17 @@
     "url": "https://github.com/andreacanton/andreacanton-website/issues"
   },
   "homepage": "https://andreacanton.dev",
+  "engines": {
+    "node": ">=18.16.0"
+  },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
-    "@astrojs/mdx": "^3.1.4",
-    "@astrojs/netlify": "^5.5.1",
-    "astro": "^ 4.14.4",
+    "@astrojs/mdx": "^4.0.7",
+    "astro": "^5.1.8",
     "sass": "^1.77.8",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
-    "bun-types": "^1.1.25",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1"
   }
