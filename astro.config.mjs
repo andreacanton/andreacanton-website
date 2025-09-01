@@ -1,6 +1,8 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   build: {
@@ -8,7 +10,7 @@ export default defineConfig({
   },
   site: 'https://andreacanton.dev',
   trailingSlash: 'always',
-  integrations: [mdx()],
+  integrations: [mdx(), sitemap()],
   image: {
     service: passthroughImageService(),
   },
