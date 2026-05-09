@@ -2,3 +2,4 @@ node_modules/
 gitflow/
 dist/
 .scannerwork
+.codex/config.toml
