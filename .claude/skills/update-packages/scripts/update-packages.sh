@@ -9,11 +9,14 @@
 #   FAIL:  needs attention — read the output, fix, then re-run
 #
 # Subcommands:
-#   update   checkout main, pull, branch, `pnpm update`, `pnpm build`, commit
-#   pr       push the branch and open a PR; prints the PR number
-#   merge N  watch checks for PR N, merge if green, then clean up branches
+#   update      checkout main, pull, branch, `pnpm update`, `pnpm build`, commit
+#   major PKG   force-upgrade PKG past its semver range (`pnpm update --latest`),
+#               `pnpm build`, commit as a separate change
+#   abort       no updates were made on the branch — clean up and stop
+#   pr          push the branch and open a PR; prints the PR number
+#   merge N     watch checks for PR N, merge if green, then clean up branches
 #
-# Usage: .claude/scripts/update-packages.sh <update|pr|merge> [pr-number]
+# Usage: .claude/scripts/update-packages.sh <update|major|abort|pr|merge> [arg]
 
 set -euo pipefail
 
@@ -43,9 +46,7 @@ cmd_update() {
   pnpm update || die "pnpm update failed"
 
   if [ -z "$(git status --porcelain package.json pnpm-lock.yaml)" ]; then
-    echo "STOP: no dependency changes — all packages already up to date"
-    git checkout main
-    git branch -D "${BRANCH}"
+    echo "STOP: no in-range dependency changes — branch kept open to check for major-version upgrades next"
     exit 0
   fi
 
@@ -56,7 +57,42 @@ cmd_update() {
   git add package.json pnpm-lock.yaml
   git commit -m "${COMMIT_MSG}" || die "git commit failed"
 
-  echo "OK: update complete — next run 'pr'"
+  echo "OK: update complete — next check for major-version upgrades"
+}
+
+cmd_major() {
+  command -v pnpm >/dev/null 2>&1 || die "pnpm is not installed"
+  pkg="${1:-}"
+  [ -n "${pkg}" ] || die "major requires a package name: major <package>"
+
+  echo "OK: force-upgrading ${pkg} to its latest version (ignoring its semver range)"
+  pnpm update "${pkg}" --latest || die "pnpm update --latest failed for ${pkg}"
+
+  if [ -z "$(git status --porcelain package.json pnpm-lock.yaml)" ]; then
+    echo "STOP: ${pkg} is already at its latest version — nothing to do"
+    exit 0
+  fi
+
+  echo "OK: running pnpm build to verify the major upgrade of ${pkg}"
+  pnpm build || die "pnpm build failed after upgrading ${pkg} — investigate and fix before re-running"
+
+  echo "OK: committing major upgrade of ${pkg}"
+  git add package.json pnpm-lock.yaml
+  git commit -m "chore: Upgrade ${pkg} to latest major version" || die "git commit failed"
+
+  echo "OK: major upgrade of ${pkg} complete"
+}
+
+cmd_abort() {
+  [ "$(git branch --show-current)" = "${BRANCH}" ] || die "not on ${BRANCH} — nothing to abort"
+  if [ -n "$(git log main.."${BRANCH}" --oneline)" ]; then
+    die "refusing to abort — ${BRANCH} has commits ahead of main"
+  fi
+
+  echo "OK: no updates were made — cleaning up ${BRANCH}"
+  git checkout main || die "could not switch to main"
+  git branch -D "${BRANCH}"
+  echo "STOP: nothing to update — all packages already up to date"
 }
 
 cmd_pr() {
@@ -68,7 +104,7 @@ cmd_pr() {
   echo "OK: creating PR"
   gh pr create --base main --head "${BRANCH}" \
     --title "${PR_TITLE}" \
-    --body "Automated dependency update via the update-packages workflow." \
+    --body "Automated dependency update via the update-packages workflow, including any major-version upgrades Snyk identified as necessary to clear a vulnerability." \
     || die "gh pr create failed"
 
   pr_number="$(gh pr view "${BRANCH}" --json number --jq .number)" \
@@ -102,7 +138,9 @@ cmd_merge() {
 
 case "${1:-}" in
   update) cmd_update ;;
+  major)  shift; cmd_major "$@" ;;
+  abort)  cmd_abort ;;
   pr)     cmd_pr ;;
   merge)  shift; cmd_merge "$@" ;;
-  *)      die "unknown subcommand '${1:-}' — use: update | pr | merge <pr-number>" ;;
+  *)      die "unknown subcommand '${1:-}' — use: update | major <package> | abort | pr | merge <pr-number>" ;;
 esac
