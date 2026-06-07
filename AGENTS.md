@@ -23,3 +23,11 @@ Personal website and blog for Andrea Canton, built with Astro 5 and deployed on 
 - **Frontmatter schema** (`src/interfaces/Frontmatter.ts`): `date` (required), `title` (required), `subtitle`, `description`, `tags`, `canonicalUrl`, `draft`, `lastUpdate`, `image`
 - **Styles**: Single global SCSS file at `src/styles/main.scss`, plus scoped `<style lang="scss">` blocks in components/layouts
 - **Config**: Trailing slashes enforced (`trailingSlash: 'always'`), inline stylesheets, passthrough image service, sitemap integration
+
+## Contribution
+
+- never use folder when creating branches only a descriptive
+  - NO: feat/add-button 
+  - YES: add-button
+  - NO: chore/upgrade-packages
+  - yes: upgrade-packages
