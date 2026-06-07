@@ -1,17 +1,15 @@
 ---
 name: update-packages
 description: Update all project dependencies and create a PR for review. Use when the user wants to update/upgrade npm/pnpm packages, bump dependencies, or run the update-packages workflow.
-model: haiku
 ---
 
 # Update Packages
 
 Updates all project dependencies — including major-version bumps where Snyk
 shows they're needed to clear a vulnerability — and opens a PR for review.
-The mechanical, deterministic work lives in a bundled bash script so the
-workflow is reliable enough for a small model to drive; the Snyk MCP tools
-handle the part that needs judgment (deciding *which* packages need a major
-upgrade).
+The mechanical, deterministic work lives in a bundled bash script, keeping
+the workflow reliable; the Snyk MCP tools handle the part that needs
+judgment (deciding *which* packages need a major upgrade).
 
 ## How it works
 
