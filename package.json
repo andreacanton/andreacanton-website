@@ -28,14 +28,19 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
-    "@astrojs/mdx": "^4.3.14",
+    "@astrojs/mdx": "^6.0.2",
     "@astrojs/sitemap": "^3.7.3",
-    "astro": "^5.18.2",
+    "astro": "^6.4.4",
     "sass": "^1.100.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "yaml": "^2.8.3"
+    }
   }
 }

@@ -2,7 +2,15 @@
 import BlogLayout from '../layouts/BlogLayout.astro';
 import ArticleDate from '../components/article-date.astro';
 import type Frontmatter from '../interfaces/Frontmatter';
-const allPosts = await Astro.glob<Frontmatter>('./posts/*.mdx');
+
+const posts = import.meta.glob<{ frontmatter: Frontmatter }>('./posts/*.mdx', {
+  eager: true,
+});
+
+const allPosts = Object.entries(posts).map(([path, module]) => ({
+  ...module,
+  url: path.replace('./posts/', '/blog/').replace('.mdx', '/'),
+}));
 
 const listedPosts = allPosts
   .filter((p) => !p.frontmatter.draft)
