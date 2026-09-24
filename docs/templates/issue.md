@@ -30,6 +30,11 @@
 
 - <Condizioni verificabili per considerare la issue chiusa.>
 
+## Domande aperte e blocker
+
+- <Domanda a cui manca una risposta, con chi può rispondere.>
+- <Blocker: cosa impedisce di procedere e da cosa dipende.>
+
 ## Rischi
 
 - <Rischi noti e come mitigarli.>
