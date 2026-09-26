@@ -7,7 +7,6 @@
 
 # THANKS
 
-    Astro.build
     Develon: who made my photo
     in particular:
     - you that are spending some of your precious time to read this file!
@@ -15,4 +14,4 @@
 
 # TECHNOLOGY COLOPHON
 
-    CSS3, HTML5, Astro
+    CSS3, HTML5, Bun
