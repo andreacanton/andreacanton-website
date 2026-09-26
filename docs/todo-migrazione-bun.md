@@ -132,7 +132,7 @@ T5.1 e T5.2 vivono in moduli separati (`highlight.ts`, `dev.ts`) e girano in par
   - File toccati: `netlify.toml`
   - Acceptance: La deploy preview viene costruita con successo.
   - Dipende da: T1.2, T7.1
-- [ ] **T7.4 · Verifica sulla deploy preview**
+- [x] **T7.4 · Verifica sulla deploy preview**
   - Complessità: low
   - Descrizione: `curl -I` sulle vecchie URL e controllo di sitemap e feed pubblicati.
   - File toccati: nessuno
@@ -144,7 +144,7 @@ T5.1 e T5.2 vivono in moduli separati (`highlight.ts`, `dev.ts`) e girano in par
 Da aggiornare a ogni task completato.
 
 - Task totali: 18
-- Fatti: 17
-- Da fare: 1
+- Fatti: 18
+- Da fare: 0
 - Fase corrente: 7 · Pulizia e deploy
-- Prossimo task: T7.4 · Verifica sulla deploy preview
+- Prossimo task: nessuno
