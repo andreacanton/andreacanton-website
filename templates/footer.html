@@ -1,0 +1,6 @@
+<footer>Build with <a href="https://bun.sh/" class="notranslate" target="_blank">Bun</a> - Hosted by <span
+    class="notranslate">Netlify</span> - <a href="https://github.com/andreacanton/andreacanton-website"
+    class="notranslate" target="_blank">github repo</a> - All content is under <a
+    href="https://creativecommons.org/licenses/by-sa/4.0/" class="notranslate" target="_blank">CC BY-SA 4.0</a> license
+  - <button type="button" class="theme-toggle" hidden></button></footer>
+<script>(() => { const b = document.querySelector('.theme-toggle'), r = document.documentElement, m = matchMedia('(prefers-color-scheme: dark)'), cur = () => r.dataset.theme || (m.matches ? 'dark' : 'light'), label = () => b.textContent = cur() === 'dark' ? 'light theme' : 'dark theme'; b.hidden = false; label(); m.addEventListener('change', label); b.onclick = () => { r.dataset.theme = cur() === 'dark' ? 'light' : 'dark'; try { localStorage.theme = r.dataset.theme } catch { } label() } })()</script>

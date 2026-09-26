@@ -1,0 +1,49 @@
+---
+title: Energy versus Time
+subtitle: Rethinking Decision-Making in Everyday Life
+description: Stop focusing only on time management. Discover why energy management is more effective for productivity and well-being, with practical tips for recharging and balancing mental vs physical activities.
+tags: [energy, decision-making, plan]
+---
+"Time is money," they say, but maybe not every time. I'm recently thinking that maybe we're all wrong choosing time and time only to plan our lives. What if energy is a better way to decide how we spend our days?
+
+### When time isn't enough
+
+My therapist during a difficult period of my life said to me, "Time doesn't heal wounds; it's what you do in that time that heals."
+
+Think about it. Watching TV shows or playing video games distracts me from my current situation, but it doesn't change anything. Time passes but isn't filled with meaningful actions.
+
+Scrolling your preferred social media platform—what does it actually add to your life? You're constantly draining your energy for something that gives you very little in return.
+
+### The energy approach
+
+Instead, try being intentional about how you spend your energy and how you recharge it.
+
+Recharging your energy is as important as using it. But how do you do it effectively?
+
+### Sleep is just the beginning
+
+The first thing that probably comes to mind is sleeping. You surely know you need at least 7 hours every night, ideally 8 hours.
+
+But spending time to recharge doesn't mean you have to do nothing. Sometimes changing your routine or doing something different can be recharging. After a day of hiking you might feel tired, but you also feel refreshed.
+
+### Find what energizes you
+
+Hobbies help recharge your mental batteries: playing an instrument, painting, woodworking, writing—if it's not for your job, it can restore your energy.
+
+Here's another insight from my therapist: if your work is mostly mental, try doing something physical to recharge. If your work is physical, do something that engages your mind instead. This balance helps you tap into different energy reserves.
+
+For me and my wife, even working on our expenses spreadsheet is refreshing... I mean, Excel! It's all about purpose and mindset. It's not work; it's doing something different with intention.
+
+### My charity experience
+
+For three years I participated in a local charity delivering food to people in need in my town. Every Thursday night from 7 PM through midnight seemed stressful from the outside. But the next day I was ready to tackle work with my mind completely refreshed.
+
+The energy I put into helping others somehow gave me more energy back.
+
+(Note: After three years it started feeling like a job and I wasn't able to help as effectively, so I decided to take a break. I'll restart after "cooling down".)
+
+### Your turn
+
+As always, I'm not here to tell you how to live your life. This is just a thought from my experience, and I'm hoping it can start a conversation.
+
+What activities drain your energy? What restores it? The answers might surprise you.

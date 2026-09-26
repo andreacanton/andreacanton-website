@@ -1,0 +1,11 @@
+/posts/2020-02-19-git-mantras/ /blog/git-mantras/ 301
+/posts/2020-12-24-simple-writing-text-animation/ /blog/simple-writing-text-animation/ 301
+/posts/2022-01-02-finding-home/ /blog/finding-home/ 301
+/posts/2023-01-24-over-estimate/ /blog/over-estimate/ 301
+/posts/2023-03-04-smart-laziness/ /blog/smart-laziness/ 301
+/posts/2024-10-13-you-are-culture/ /blog/you-are-culture/ 301
+/posts/2025-05-27-energy-time/ /blog/energy-time/ 301
+/posts/2025-08-17-lead-by-example/ /blog/lead-by-example/ 301
+/posts/2025-08-23-naming-things/ /blog/naming-things/ 301
+/posts/2025-11-08-always-ready-to-leave/ /blog/always-ready-to-leave/ 301
+/posts/* /blog/:splat 301
