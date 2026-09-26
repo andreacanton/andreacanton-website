@@ -46,6 +46,33 @@ const addIds = (html: string) => {
   });
 };
 
+// Bun.markdown has no footnotes: collect `[^id]: text` definitions, number the
+// references in order of appearance and render the GFM-style markup Astro used.
+const renderMarkdown = (md: string) => {
+  const defs = new Map<string, string>();
+  md = md.replace(/^\[\^([^\]\s]+)\]:[ \t]*(.*)$/gm, (_, id, text) => {
+    defs.set(id, text.trim());
+    return '';
+  });
+  const order: string[] = [];
+  md = md.replace(/\[\^([^\]\s]+)\](?!:)/g, (all, id) => {
+    if (!defs.has(id)) return all;
+    if (!order.includes(id)) order.push(id);
+    const n = order.indexOf(id) + 1;
+    return `<sup><a href="#user-content-fn-${n}" id="user-content-fnref-${n}" data-footnote-ref="true" aria-describedby="footnote-label">${n}</a></sup>`;
+  });
+  let html = Bun.markdown.html(md);
+  if (order.length) {
+    const items = order.map((id, i) => {
+      const n = i + 1;
+      const text = Bun.markdown.html(defs.get(id)!).trim().replace(/^<p>|<\/p>$/g, '');
+      return `<li id="user-content-fn-${n}">\n<p>${text} <a href="#user-content-fnref-${n}" data-footnote-backref aria-label="Back to reference ${n}" class="data-footnote-backref">↩</a></p>\n</li>`;
+    });
+    html += `<section data-footnotes="true" class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>\n<ol>\n${items.join('\n')}\n</ol>\n</section>`;
+  }
+  return html;
+};
+
 async function readPosts(dir: string): Promise<Post[]> {
   let files: string[] = [];
   try {
@@ -69,7 +96,7 @@ async function readPosts(dir: string): Promise<Post[]> {
       subtitle: data.subtitle ? String(data.subtitle) : '',
       description: data.description ? String(data.description) : '',
       tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-      content: highlight(addIds(Bun.markdown.html(fm ? fm[2] : raw))),
+      content: highlight(addIds(renderMarkdown(fm ? fm[2] : raw))),
     });
   }
   return posts;
