@@ -1,5 +1,5 @@
-import { existsSync, watch } from 'node:fs';
-import { join, normalize } from 'node:path';
+import { watch } from 'node:fs';
+import { join, normalize, sep } from 'node:path';
 import { build } from './build.ts';
 
 const PORT = Number(process.env.PORT ?? 3000);
@@ -82,10 +82,10 @@ const schedule = () => {
     running = false;
   }, 100);
 };
-// Git doesn't keep empty folders, so e.g. drafts/ may not exist in a fresh clone.
-for (const p of ['blog', 'drafts', 'pages', 'templates', 'public']) {
-  if (existsSync(p)) watch(p, { recursive: true }, schedule);
-}
-// Watch the root dir, not the file: editors that save by replacing the file
-// would leave a file watcher attached to the old inode.
-watch('.', (_, file) => file === 'style.css' && schedule());
+// Watch the root dir instead of each source: folders like drafts/ may be
+// created after startup (git doesn't keep empty ones), and editors that save by
+// replacing a file would leave a file watcher attached to the old inode.
+const SOURCES = new Set(['blog', 'drafts', 'pages', 'templates', 'public', 'style.css']);
+watch('.', { recursive: true }, (_, file) => {
+  if (file && SOURCES.has(file.split(sep)[0])) schedule();
+});
