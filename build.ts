@@ -122,10 +122,13 @@ export async function build({ drafts = false, dev = false } = {}) {
   const all = drafts ? [...published, ...(await readPosts('drafts'))] : published;
   all.sort((a, b) => b.date.localeCompare(a.date));
 
-  const wrap = (page: string, title: string, description: string, body: string) => {
+  // `path` is the page's canonical path; pages without one (404) get no canonical.
+  const wrap = (page: string, title: string, description: string, body: string, path?: string) => {
+    const url = path && escapeHtml(SITE + path);
     const html = render(base, {
       title: escapeHtml(title),
-      description: escapeHtml(description),
+      description: escapeHtml(description || HOME_DESC),
+      canonical: url ? `<link rel="canonical" href="${url}"><meta property="og:url" content="${url}">` : '',
       style,
       page,
       body,
@@ -162,7 +165,7 @@ export async function build({ drafts = false, dev = false } = {}) {
       content: p.content,
       footer,
     });
-    await write(`blog/${p.slug}/index.html`, wrap('post', `${p.title} ~ Andrea Canton`, p.description || p.subtitle, body));
+    await write(`blog/${p.slug}/index.html`, wrap('post', `${p.title} ~ Andrea Canton`, p.description || p.subtitle, body, `/blog/${p.slug}/`));
   }
 
   const items = all
@@ -176,15 +179,15 @@ export async function build({ drafts = false, dev = false } = {}) {
     )
     .join('\n');
   const blogBody = render(blogTpl, { header, count: String(all.length), posts: items, footer });
-  await write('blog/index.html', wrap('blog', 'Blog ~ Andrea Canton', BLOG_DESC, blogBody));
+  await write('blog/index.html', wrap('blog', 'Blog ~ Andrea Canton', BLOG_DESC, blogBody, '/blog/'));
 
-  for (const [file, page, title] of [
-    ['index.html', 'home', HOME_TITLE],
-    ['404.html', 'not-found', HOME_TITLE],
+  for (const [file, page, title, path] of [
+    ['index.html', 'home', HOME_TITLE, '/'],
+    ['404.html', 'not-found', HOME_TITLE, undefined],
   ] as const) {
     const src = await read(`pages/${file}`);
     const body = render(src, { header, footer });
-    await write(file, wrap(page, title, HOME_DESC, body));
+    await write(file, wrap(page, title, HOME_DESC, body, path));
   }
 
   const pub = published.slice().sort((a, b) => b.date.localeCompare(a.date));
