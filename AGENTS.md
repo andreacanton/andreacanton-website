@@ -11,6 +11,7 @@ Personal website and blog for Andrea Canton, a zero-dependency static site built
 - **Dev server**: `bun dev.ts` (or `bun run dev`)
 - **Build**: `bun build.ts` (or `bun run build`), outputs to `dist/`
 - **Test**: `bun test` (or `bun run test`), tests live in `test/`
+- **Coverage**: `bun run test:coverage` writes `coverage/lcov.info`, which CI sends to SonarCloud
 - **Format**: `bunx prettier --write <file>`
 
 ## Architecture
