@@ -4,25 +4,24 @@ This file provides guidance to Codex when working with code in this repository.
 
 ## Project Overview
 
-Personal website and blog for Andrea Canton, built with Astro 5 and deployed on Netlify. Site URL: https://andreacanton.dev
+Personal website and blog for Andrea Canton, a zero-dependency static site built with Bun 1.3.9 and deployed on Netlify. Site URL: https://andreacanton.dev
 
 ## Commands
 
-- **Dev server**: `pnpm dev`
-- **Build** (includes type checking): `pnpm build` (runs `astro check && astro build`)
-- **Preview production build**: `pnpm preview`
-- **Format**: `pnpm exec prettier --write <file>`
+- **Dev server**: `bun dev.ts` (or `bun run dev`)
+- **Build**: `bun build.ts` (or `bun run build`), outputs to `dist/`
+- **Format**: `bunx prettier --write <file>`
 
 ## Architecture
 
-- **Framework**: Astro 5 with MDX for blog posts, SCSS for styling (modern-compiler API), TypeScript
-- **Package manager**: pnpm
-- **Layout hierarchy**: `BaseLayout` (HTML shell, meta/OG tags) -> `BlogLayout` (adds topbar + footer) -> `PostLayout` (article wrapper with frontmatter rendering)
-- **Pages**: File-based routing under `src/pages/`. Homepage (`index.astro`) is a standalone landing page using `BaseLayout` directly. Blog listing (`blog.astro`) globs all `posts/*.mdx` files.
-- **Blog posts**: MDX files in `src/pages/posts/` with naming convention `YYYY-MM-DD-slug.mdx`. Drafts go in `src/pages/posts/draft/`. Posts use `PostLayout` via frontmatter `layout` field.
-- **Frontmatter schema** (`src/interfaces/Frontmatter.ts`): `date` (required), `title` (required), `subtitle`, `description`, `tags`, `canonicalUrl`, `draft`, `lastUpdate`, `image`
-- **Styles**: Single global SCSS file at `src/styles/main.scss`, plus scoped `<style lang="scss">` blocks in components/layouts
-- **Config**: Trailing slashes enforced (`trailingSlash: 'always'`), inline stylesheets, passthrough image service, sitemap integration
+- **Runtime**: Bun 1.3.9, no npm dependencies and no `node_modules`
+- **Build**: `build.ts` renders pages and blog posts into `dist/`; `dev.ts` serves and rebuilds during development; `highlight.ts` handles code highlighting
+- **Templates**: HTML shells in `templates/` (`base`, `header`, `footer`, `blog`, `post`)
+- **Pages**: static pages in `pages/` (`index.html`, `404.html`)
+- **Blog posts**: Markdown files in `blog/` named `YYYY-MM-DD-slug.md`. Drafts go in `drafts/` and are never published.
+- **Styles**: single global stylesheet `style.css`
+- **Static assets**: `public/` is copied as-is into `dist/` (images, favicons, `_redirects`, etc.)
+- **Deploy**: Netlify via `netlify.toml` (`bun build.ts`, publish `dist`, `BUN_VERSION` 1.3.9)
 
 ## Contribution
 
