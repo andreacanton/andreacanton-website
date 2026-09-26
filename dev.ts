@@ -1,4 +1,4 @@
-import { watch } from 'node:fs';
+import { existsSync, watch } from 'node:fs';
 import { join, normalize } from 'node:path';
 import { build } from './build.ts';
 
@@ -8,9 +8,17 @@ const clients = new Set<ReadableStreamDefaultController<string>>();
 async function rebuild() {
   try {
     await build({ drafts: true, dev: true });
-    for (const c of clients) c.enqueue('data: reload\n\n');
   } catch (err) {
     console.error('rebuild failed:', err);
+    return;
+  }
+  for (const c of clients) {
+    try {
+      c.enqueue('data: reload\n\n');
+    } catch {
+      // The stream closed without cancel() being called.
+      clients.delete(c);
+    }
   }
 }
 
@@ -74,8 +82,9 @@ const schedule = () => {
     running = false;
   }, 100);
 };
+// Git doesn't keep empty folders, so e.g. drafts/ may not exist in a fresh clone.
 for (const p of ['blog', 'drafts', 'pages', 'templates', 'public']) {
-  watch(p, { recursive: true }, schedule);
+  if (existsSync(p)) watch(p, { recursive: true }, schedule);
 }
 // Watch the root dir, not the file: editors that save by replacing the file
 // would leave a file watcher attached to the old inode.
