@@ -324,8 +324,8 @@ svg {
   }
 }
 
-/* footer (blog and post) */
-footer {
+/* site footer (blog and post) */
+body > footer {
   font-size: 0.6em;
   padding: 20px;
   margin: 3em 0;
@@ -466,19 +466,18 @@ footer {
     padding: 20px;
   }
 
-  footer {
+  main > footer {
+    font-family: monospace;
+    margin-top: 3em;
+    padding-top: 2em;
     border-top: 10px solid var(--grey);
-    padding: 2em 20px 0;
   }
 }
 
 @media screen and (min-width: 620px) {
-  .post {
-    main,
-    footer {
-      width: 600px;
-      padding: 2em 0 0;
-    }
+  .post main {
+    width: 600px;
+    padding: 2em 0 0;
   }
 }
 
