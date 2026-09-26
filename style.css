@@ -28,6 +28,7 @@
     --background-color: rgb(0, 0, 0);
     --inline-code-bg: rgba(255, 255, 255, 0.4);
     --icon-hover: rgb(255, 255, 255);
+    --brand-github: rgb(255, 255, 255);
 
     --tok-comment: #8b949e;
     --tok-string: #7ee2a8;

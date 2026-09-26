@@ -72,6 +72,9 @@ const schedule = () => {
     running = false;
   }, 100);
 };
-for (const p of ['blog', 'drafts', 'pages', 'templates', 'public', 'style.css']) {
+for (const p of ['blog', 'drafts', 'pages', 'templates', 'public']) {
   watch(p, { recursive: true }, schedule);
 }
+// Watch the root dir, not the file: editors that save by replacing the file
+// would leave a file watcher attached to the old inode.
+watch('.', (_, file) => file === 'style.css' && schedule());
