@@ -8,7 +8,6 @@ const clients = new Set<ReadableStreamDefaultController<string>>();
 async function rebuild() {
   try {
     await build({ drafts: true, dev: true });
-    console.log('rebuilt');
     for (const c of clients) c.enqueue('data: reload\n\n');
   } catch (err) {
     console.error('rebuild failed:', err);
