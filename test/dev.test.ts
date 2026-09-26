@@ -140,11 +140,22 @@ describe('dev server', () => {
   // drafts/ is not in the fixture: git doesn't keep empty folders, so it may
   // only be created after the server started.
   test('picks up drafts in a folder created after startup', async () => {
-    const reload = await connectReload();
+    let reload = await connectReload();
     await site.write({ 'drafts/2024-03-01-new.md': post('title: New draft') });
     await waitFor(reload.body, 'data: reload');
     reload.close();
     expect((await fetch(`${base}/blog/new/`)).status).toBe(200);
+
+    // Later edits inside the new folder must be seen too.
+    reload = await connectReload();
+    await site.write({
+      'drafts/2024-03-01-new.md': post('title: New draft', 'Edited draft'),
+    });
+    await waitFor(reload.body, 'data: reload');
+    reload.close();
+    expect(await (await fetch(`${base}/blog/new/`)).text()).toContain(
+      'Edited draft'
+    );
   });
 
   test('does not rebuild on its own output', async () => {

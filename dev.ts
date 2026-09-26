@@ -1,4 +1,4 @@
-import { watch } from 'node:fs';
+import { type FSWatcher, statSync, watch } from 'node:fs';
 import { join, normalize, sep } from 'node:path';
 import { build } from './build.ts';
 
@@ -86,6 +86,17 @@ const schedule = () => {
 // created after startup (git doesn't keep empty ones), and editors that save by
 // replacing a file would leave a file watcher attached to the old inode.
 const SOURCES = new Set(['blog', 'drafts', 'pages', 'templates', 'public', 'style.css']);
-watch('.', { recursive: true }, (_, file) => {
-  if (file && SOURCES.has(file.split(sep)[0])) schedule();
-});
+let watcher: FSWatcher | undefined;
+const startWatching = () => {
+  watcher?.close();
+  watcher = watch('.', { recursive: true }, (event, file) => {
+    if (!file || !SOURCES.has(file.split(sep)[0])) return;
+    schedule();
+    // Bun only watches the folders that exist when watch() starts, so a new
+    // folder needs a fresh watcher. The scheduled rebuild reads whatever was
+    // written into it in the meantime.
+    if (event === 'rename' && statSync(file, { throwIfNoEntry: false })?.isDirectory())
+      startWatching();
+  });
+};
+startWatching();
