@@ -4,13 +4,13 @@ import { highlight } from './highlight.ts';
 
 export const SITE = 'https://andreacanton.dev';
 
-export const escapeHtml = (s: unknown): string =>
-  String(s ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+export const escapeHtml = (s: string): string =>
+  s
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
 
 export const render = (tpl: string, vars: Record<string, string>) =>
   tpl.replace(/\{\{(\w+)\}\}/g, (_, k) => vars[k] ?? '');
@@ -31,14 +31,15 @@ const fmtDate = (iso: string) =>
     month: 'short',
     year: 'numeric',
     timeZone: 'UTC',
-  }).replace(/\./g, '');
+  }).replaceAll('.', '');
 
 const ICON = `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="date"><path class="icon" d="M21 3h-3V1h-2v2H8V1H6v2H3v18h18V3zm-2 16H5V8h14v11zM7 10h5v5H7v-5z"></path></svg>`;
 
 const addIds = (html: string) => {
   const seen = new Map<string, number>();
   return html.replace(/<(h[23])>([\s\S]*?)<\/\1>/g, (_, tag, inner) => {
-    let id = inner.replace(/<[^>]+>/g, '').replace(/&[a-z#0-9]+;/gi, '').toLowerCase().replace(/[^\p{L}\p{N}\s_-]/gu, '').trim().replace(/\s/g, '-');
+    const text = inner.replace(/<[^>]*>/g, '').replace(/&[a-z#0-9]+;/gi, '');
+    let id = text.toLowerCase().replace(/[^\p{L}\p{N}\s_-]/gu, '').trim().replace(/\s/g, '-');
     const n = seen.get(id) ?? 0;
     seen.set(id, n + 1);
     if (n) id += `-${n}`;
@@ -50,7 +51,7 @@ const addIds = (html: string) => {
 // references in order of appearance and render the GFM-style markup Astro used.
 const renderMarkdown = (md: string) => {
   const defs = new Map<string, string>();
-  md = md.replace(/^\[\^([^\]\s]+)\]:[ \t]*(.*)$/gm, (_, id, text) => {
+  md = md.replace(/^\[\^([^\]\s]+)\]:(.*)$/gm, (_, id, text) => {
     defs.set(id, text.trim());
     return '';
   });
@@ -73,6 +74,27 @@ const renderMarkdown = (md: string) => {
   return html;
 };
 
+const str = (v: unknown) => (typeof v === 'string' || typeof v === 'number' ? String(v) : '');
+
+async function parsePost(dir: string, file: string): Promise<Post> {
+  const m = /^(\d{4}-\d{2}-\d{2})-(.+)\.md$/.exec(file);
+  if (!m) throw new Error(`${dir}/${file}: name must be YYYY-MM-DD-slug.md`);
+  const raw = await Bun.file(join(dir, file)).text();
+  const fm = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(raw);
+  const data = ((fm ? Bun.YAML.parse(fm[1]) : null) ?? {}) as Record<string, unknown>;
+  const title = str(data.title).trim();
+  if (!title) throw new Error(`${dir}/${file}: missing "title" in frontmatter`);
+  return {
+    date: m[1],
+    slug: m[2],
+    title,
+    subtitle: str(data.subtitle),
+    description: str(data.description),
+    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+    content: highlight(addIds(renderMarkdown(fm ? fm[2] : raw))),
+  };
+}
+
 async function readPosts(dir: string): Promise<Post[]> {
   let files: string[] = [];
   try {
@@ -81,24 +103,7 @@ async function readPosts(dir: string): Promise<Post[]> {
     return [];
   }
   const posts: Post[] = [];
-  for (const file of files) {
-    const m = file.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.md$/);
-    if (!m) throw new Error(`${dir}/${file}: name must be YYYY-MM-DD-slug.md`);
-    const raw = await Bun.file(join(dir, file)).text();
-    const fm = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
-    const data = ((fm ? Bun.YAML.parse(fm[1]) : null) ?? {}) as Record<string, unknown>;
-    const title = typeof data.title === 'string' ? data.title.trim() : '';
-    if (!title) throw new Error(`${dir}/${file}: missing "title" in frontmatter`);
-    posts.push({
-      date: m[1],
-      slug: m[2],
-      title,
-      subtitle: data.subtitle ? String(data.subtitle) : '',
-      description: data.description ? String(data.description) : '',
-      tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-      content: highlight(addIds(renderMarkdown(fm ? fm[2] : raw))),
-    });
-  }
+  for (const file of files) posts.push(await parsePost(dir, file));
   return posts;
 }
 
@@ -196,9 +201,10 @@ export async function build({ drafts = false, dev = false } = {}) {
   );
   const rssItems = pub
     .slice(0, 20)
-    .map(
-      (p) => `<item><title>${escapeHtml(p.title)}</title><link>${escapeHtml(`${SITE}/blog/${p.slug}/`)}</link><guid isPermaLink="true">${escapeHtml(`${SITE}/blog/${p.slug}/`)}</guid><pubDate>${new Date(p.date + 'T00:00:00Z').toUTCString()}</pubDate><description>${escapeHtml(p.description || p.subtitle)}</description></item>`,
-    )
+    .map((p) => {
+      const url = escapeHtml(SITE + '/blog/' + p.slug + '/');
+      return `<item><title>${escapeHtml(p.title)}</title><link>${url}</link><guid isPermaLink="true">${url}</guid><pubDate>${new Date(p.date + 'T00:00:00Z').toUTCString()}</pubDate><description>${escapeHtml(p.description || p.subtitle)}</description></item>`;
+    })
     .join('\n');
   await write(
     'feed.xml',

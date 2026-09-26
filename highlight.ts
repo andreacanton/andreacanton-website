@@ -1,6 +1,6 @@
 const ENTITIES: Record<string, string> = { '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&#x27;': "'", '&amp;': '&' };
 const decode = (s: string) => s.replace(/&(?:lt|gt|quot|amp|#39|#x27);/g, (e) => ENTITIES[e]);
-const escape = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const escape = (s: string) => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 
 const KEYWORDS =
   'const|let|var|function|return|if|else|for|while|do|switch|case|break|continue|new|class|extends|implements|interface|type|enum|import|export|from|as|default|async|await|try|catch|finally|throw|typeof|instanceof|in|of|void|null|undefined|true|false|this|readonly|public|private|protected|static|satisfies';
@@ -52,7 +52,8 @@ export function highlight(html: string): string {
     (_, lang: string | undefined, body: string) => {
       const code = decode(body);
       const inner = lang && LANGS.has(lang.toLowerCase()) ? tokenize(code) : escape(code);
-      return `<pre><code${lang ? ` class="language-${lang}"` : ''}>${inner}</code></pre>`;
+      const cls = lang ? ' class="language-' + lang + '"' : '';
+      return `<pre><code${cls}>${inner}</code></pre>`;
     },
   );
 }

@@ -62,7 +62,10 @@ let again = false;
 const schedule = () => {
   clearTimeout(timer);
   timer = setTimeout(async () => {
-    if (running) return void (again = true);
+    if (running) {
+      again = true;
+      return;
+    }
     running = true;
     do {
       again = false;

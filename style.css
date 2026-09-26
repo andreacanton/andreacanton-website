@@ -87,7 +87,7 @@ a,
     var(--accent) 100%
   );
   background-size: 100% 200%;
-  word-break: break-word;
+  overflow-wrap: anywhere;
   padding: 2px 0 1px;
   transition: background-position 120ms ease-in-out 0s, padding 120ms ease-in-out 0s;
   background-position: 0 0;
