@@ -6,8 +6,6 @@ Issue: <#numero o link>
 
 ## Fase 1: <Nome della fase>
 
-<Obiettivo della fase in una frase.>
-
 - [ ] **T1.1 · <Titolo del task>**
   - Complessità: <bassa | media | alta>
   - Descrizione: <Breve descrizione di cosa va fatto.>
@@ -20,8 +18,6 @@ Issue: <#numero o link>
   - Dipendenze: <...>
 
 ## Fase 2: <Nome della fase>
-
-<Obiettivo della fase in una frase.>
 
 - [ ] **T2.1 · <Titolo del task>**
   - Complessità: <bassa | media | alta>
