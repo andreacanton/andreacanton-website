@@ -136,7 +136,7 @@ T5.1 e T5.2 vivono in moduli separati (`highlight.ts`, `dev.ts`) e girano in par
   - Complessità: low
   - Descrizione: `curl -I` sulle vecchie URL e controllo di sitemap e feed pubblicati.
   - File toccati: nessuno
-  - Acceptance: `/posts/<slug>/` risponde 301 verso `/blog/<slug>/`, `/posts/draft/*` risponde 404, sitemap e feed non contengono bozze.
+  - Acceptance: `/posts/<slug>/` risponde 301 verso `/blog/<slug>/` (nessuna regola dedicata per `/posts/draft/*`), sitemap e feed non contengono bozze.
   - Dipende da: T1.3, T7.3
 
 ## Rollout
