@@ -19,8 +19,8 @@ jobs:
           # Full history for blame and new code detection.
           fetch-depth: 0
       # Reads the version from engines.bun in package.json.
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
       - run: bun run test:coverage
-      - uses: SonarSource/sonarqube-scan-action@v8
+      - uses: SonarSource/sonarqube-scan-action@ba9859eae8dd6bd29e412f25ddbbef3d032000f4 # v8.2.2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
