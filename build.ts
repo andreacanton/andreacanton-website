@@ -38,7 +38,7 @@ const ICON = `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 2
 const addIds = (html: string) => {
   const seen = new Map<string, number>();
   return html.replace(/<(h[23])>([\s\S]*?)<\/\1>/g, (_, tag, inner) => {
-    const text = inner.replace(/<[^>]*>/g, '').replace(/&[a-z#0-9]+;/gi, '');
+    const text = inner.replace(/<[^<>]*>/g, '').replace(/&[a-z#0-9]+;/gi, '');
     let id = text.toLowerCase().replace(/[^\p{L}\p{N}\s_-]/gu, '').trim().replace(/\s/g, '-');
     const n = seen.get(id) ?? 0;
     seen.set(id, n + 1);
