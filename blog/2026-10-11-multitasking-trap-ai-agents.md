@@ -15,13 +15,13 @@ LLMs have changed the way we develop software, and that brings good and bad thin
 
 About a year ago I joined a company in a field where I had no prior experience. Within that first year I've done some heavy refactors of the core library. It was hard and time-consuming. But before AI, if someone had asked me to do this kind of refactor, I would have asked for more time to understand the product first. More likely, nobody would even have considered asking me to do heavy refactors on an almost 20-year-old codebase.
 
-AI unblocks. It makes it easy to start. And that's exactly where the risk begins: when starting is easy, it's also easy to overcommit. We want to deliver more, and the people around us start expecting more. More importantly, ourselves want to deliver more.
+AI unblocks. It makes it easy to start. And that's exactly where the risk begins: **when starting is easy, it's also easy to overcommit**. We want to deliver more, and the people around us start expecting more. More importantly, ourselves want to deliver more.
 
-This problem is not new. Cal Newport's *Slow Productivity* is not about AI, because these problems were there long before it. If you have any kind of job, you probably know the feeling: the urgency to get more done than you can.
+This problem is not new. Cal Newport's *Slow Productivity* is not about AI, because these problems were there long before it. If you are any *knowledge worker*, you probably know the feeling: the urgency to get more done than you can.
 
 Most of the time we try to keep up in one of two ways: we lower the quality of our output to get more things done, or we do many things at the same time.
 
-By lowering the quality I mean shipping software without testing it properly. Going to a meeting unprepared, or leaving without the information I needed. Creating software without clear, usable documentation. Releasing features without measuring their impact.
+By lowering the quality I mean shipping software without test coverage. Going to a meeting unprepared, or leaving without the information I needed. Creating software without clear, usable documentation. Releasing features without measuring their impact.
 
 By multitasking I mean switching to something else during the short waits inside a task, or worse, during a meeting (which is also rude).
 
@@ -46,3 +46,5 @@ I'm experimenting with a threshold of about fifteen minutes, but honestly I don'
 What I do know is that the pressure to fill every wait is part of the problem. That feeling that you're "not doing enough" while the agent works is exactly what pushes us to open another task, then another, until none of them gets the attention it deserves.
 
 Waiting is part of the work. You don't need to feel guilty about it.
+
+If you feel annoyed, use this "free time" to go deeper and raise the quality of what you're doing: re-read the code your agent wrote, re-read the issue, ask another agent questions to better understand what is happening and why.
