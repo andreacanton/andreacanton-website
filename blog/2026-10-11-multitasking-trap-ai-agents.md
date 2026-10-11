@@ -35,7 +35,7 @@ In *Extreme Programming Explained*, Kent Beck writes:
 
 > You can't get software out the door faster by lowering quality. Instead, you get software out the door faster by raising quality.
 
-Lowering quality to go faster is a bias, and AI makes it more tempting than ever. The speed is real at the start, but the work comes back. Software that isn't well tested ships with bugs, and every feature has to be fixed, and fixed, and fixed again. If you skip preparing for a meeting, you'll have to contact the person again, or worse, guess and make a bigger mistake. If you don't measure a feature's impact, you can't decide what to drop. And what doesn't exist doesn't break!
+Lowering quality to go faster is a bias, and AI makes it more tempting than ever. The speed is real at the start, but the work comes back. Software that isn't well tested ships with bugs, and every feature has to be fixed, and fixed, and fixed again. If you skip preparing for a meeting, you'll have to contact the person again, or worse, guess and make a bigger mistake. If you don't measure a feature's impact, you can't decide what to drop, and continue to maintain.
 
 AI could push us in the opposite direction: writing better tests, doing deeper research, exploring more ideas within the same task. That's more depth, not more tasks. But it's not what happens by default. By default, we just do more.
 
