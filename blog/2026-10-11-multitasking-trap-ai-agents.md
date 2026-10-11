@@ -1,5 +1,5 @@
 ---
-title: "The Multitasking Trap: Waiting Is Part of the Work"
+title: "The Multitasking Trap"
 subtitle: AI agents make it easy to start, and just as easy to overcommit. Every wait becomes an invitation to open a new task, and every task gets a little less of us.
 description: AI coding agents tempt us to fill every wait with another task, or to trade quality for speed. Some thoughts on multitasking, Slow Productivity and Kent Beck's view on quality, and why waiting is part of the work.
 tags: [ai, productivity, focus, software-quality]
